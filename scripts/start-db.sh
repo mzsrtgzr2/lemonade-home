@@ -32,4 +32,37 @@ echo "Cassandra up :)"
 # Create the keyspace
 echo "CREATE KEYSPACE $DB WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 1 };" | docker exec -i $SERVER cqlsh
 
-echo "create db $DB"
+echo "created db $DB"
+
+# Create tables
+echo "Creating Cassandra tables..."
+
+docker exec -i $SERVER cqlsh -e "
+USE $DB;
+
+CREATE TABLE IF NOT EXISTS vehicleevents (
+    vehicle_id TEXT,
+    event_time TIMESTAMP,
+    event_source TEXT,
+    event_type TEXT,
+    event_value TEXT,
+    event_extra_data TEXT,  
+    PRIMARY KEY (vehicle_id, event_time)
+);
+
+CREATE TABLE IF NOT EXISTS vehiclestatus (
+    vehicle_id TEXT PRIMARY KEY,
+    report_time TIMESTAMP,
+    status_source TEXT,
+    status TEXT
+);
+
+CREATE TABLE IF NOT EXISTS dailysummary (
+    vehicle_id TEXT,
+    day DATE,
+    last_event_time TIMESTAMP,
+    last_event_type TEXT,
+    PRIMARY KEY (vehicle_id, day)
+);"
+
+echo "Cassandra tables created."

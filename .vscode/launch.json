@@ -2,11 +2,36 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "run",
+            "name": "generate data",
             "type": "python",
             "request": "launch",
-            "program": "${workspaceFolder}/src/main.py", // Path to your main.py file
-            "console": "integratedTerminal"
+            "program": "${workspaceFolder}/scripts/generate-data.py",
+            "console": "integratedTerminal",
+            "args": [
+                "--data-path",
+                "${workspaceFolder}/data/"
+            ]
+        },
+        {
+            "name": "step 1 ingestion",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/step1_ingestion.py",
+            "console": "integratedTerminal",
+            "args": [
+                "--data-path",
+                "${workspaceFolder}/data/"
+            ]
+        },
+        {
+            "name": "step 2 batch aggs",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/step2_aggs.py",
+            "console": "integratedTerminal",
+            "args": [
+                
+            ]
         }
     ]
 }

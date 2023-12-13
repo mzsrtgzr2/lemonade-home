@@ -10,6 +10,7 @@ python = "^3.9"
 pyssandra = "^0.12.4"
 python-dotenv = "^1.0.0"
 pyspark = "^3.5.0"
+faker = "^20.1.0"
 
 
 [build-system]
