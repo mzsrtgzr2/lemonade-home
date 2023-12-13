@@ -14,6 +14,18 @@ We have several spark jobs here:
 ![image 1](./images/img3.png)
 
 
+## Why I chose spark
+
+I chose to use spark structured streaming because it's a very powerful tool for streaming data processing. 
+It's very easy to use and it's very scalable. It's also very easy to integrate with other data sources and sinks.
+
+In the 2nd step, I could do the aggregation with cassandra sql or materialized view but imho when operations involve complex transformations, aggregations, or if you're dealing with large datasets, leveraging Spark's capabilities could be more efficient despite the additional setup and complexity.
+
+## Why I chose Cassandra
+
+I chose Cassandra because it's a very scalable database and it's very easy to use with spark.
+Its optimized for writes and aggregation queries, which is very suitable for this task.
+
 
 ## Getting started
 ### Pre-requisites
@@ -99,17 +111,14 @@ You should see the data flowing into the database
 
 ![image 1](./images/img2.png)
 
-## Why I chose spark
+## How to go to production
 
-I chose to use spark structured streaming because it's a very powerful tool for streaming data processing. 
-It's very easy to use and it's very scalable. It's also very easy to integrate with other data sources and sinks.
+Add a pulumi/tf to deploy the infrastructure to the cloud.
+there are several options to run spark streaming - EMR, Databricks etc
 
-In the 2nd step, I could do the aggregation with cassandra sql or materialized view but imho when operations involve complex transformations, aggregations, or if you're dealing with large datasets, leveraging Spark's capabilities could be more efficient despite the additional setup and complexity.
-
-## Why I chose Cassandra
-
-I chose Cassandra because it's a very scalable database and it's very easy to use with spark.
-Its optimized for writes and aggregation queries, which is very suitable for this task.
+for the batch job - we can use airflow or any other scheduler,
+it will create a spark cluster, run the job and then destroy the cluster.
+or alternatively we can use a serverless solution like EMR-serverless.
 
 ## Next Steps
 
