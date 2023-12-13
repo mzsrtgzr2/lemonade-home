@@ -1,18 +1,12 @@
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, max, to_date
 from datetime import datetime, timedelta
+from utils.spark import load_spark_app
 from utils.cluster_config import get_cluster_config
 
 def main(cluster_config):
     # Start Spark session
-    spark = SparkSession.builder \
-        .appName("AggsCalc") \
-        .config("spark.cassandra.connection.host", cluster_config.host)\
-        .config("spark.cassandra.connection.port", "9042") \
-        .config("spark.sql.catalog.mycatalog", "com.datastax.spark.connector.datasource.CassandraCatalog") \
-        .config("spark.sql.extensions", "com.datastax.spark.connector.CassandraSparkExtensions") \
-        .config("spark.jars.packages", "com.datastax.spark:spark-cassandra-connector_2.12:3.4.1") \
-        .getOrCreate()
+    spark = load_spark_app("spark_agg_daily", cluster_config)
 
     # Read the maximum day present in the summary table
     max_day_summary = spark.read \

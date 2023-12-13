@@ -1,6 +1,6 @@
-from pyspark.sql import SparkSession
 from pyspark.sql.functions import col
 from pyspark.sql.types import StringType, StructType, TimestampType, ArrayType
+from utils.spark import load_spark_app
 from utils.cluster_config import get_cluster_config
 import argparse
 import os
@@ -8,14 +8,7 @@ import os
 
 def main(data_path, cluster_config):
     # Initialize SparkSession
-    spark = SparkSession.builder \
-    .appName("StreamingFileLoader") \
-    .config("spark.cassandra.connection.host", cluster_config.host)\
-    .config("spark.cassandra.connection.port", "9042") \
-    .config("spark.sql.catalog.mycatalog", "com.datastax.spark.connector.datasource.CassandraCatalog") \
-    .config("spark.sql.extensions", "com.datastax.spark.connector.CassandraSparkExtensions") \
-    .config("spark.jars.packages", "com.datastax.spark:spark-cassandra-connector_2.12:3.4.1") \
-    .getOrCreate()
+    spark = load_spark_app("spark_ingest_events", cluster_config)
 
    # Define the schema for vehicle_events streaming
     vehicle_events_schema = StructType() \
