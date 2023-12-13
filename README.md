@@ -11,6 +11,10 @@ We have several spark jobs here:
 
 2. spark batch job that aggregate the data from the last time the batch run and rewrite the aggregated data to the database.
 
+![image 1](./images/img3.png)
+
+
+
 ## Getting started
 ### Pre-requisites
 
