@@ -1,0 +1,12 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "run",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/main.py", // Path to your main.py file
+            "console": "integratedTerminal"
+        }
+    ]
+}
